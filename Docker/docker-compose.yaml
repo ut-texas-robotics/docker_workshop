@@ -1,0 +1,43 @@
+version: "3"
+
+services:
+  rosd_s:
+    image: rosd_i
+    container_name: rosd_c
+    build:
+      # set the build context to the directory containing build files
+      context: .
+      dockerfile: Dockerfile
+    # use the nvidia runtime for GPU access
+    runtime: nvidia
+    environment:
+      # pass the display variable to the container
+      - DISPLAY=${DISPLAY}
+      # enable NVIDIA GPU access inside the container
+      - NVIDIA_DRIVER_CAPABILITIES=all
+      - NVIDIA_VISIBLE_DEVICES=all
+      # disable qt-X11 memory sharing for RViz
+      - ENV QT_X11_NO_MITSHM=1
+    env_file:
+      # set environment variables via a file
+      - rosd.env
+    security_opt:
+    # helps with graphics display in RViz
+      - apparmor:unconfined
+    volumes:
+      # mount host directories to the container for persistent storage
+      - ../projects:/root/projects
+      # mount the X11 socket to enable graphics display
+      - /tmp/.X11-unix:/tmp/.X11-unix
+    # give the container access to the host's network
+    network_mode: host
+    # enable stdin and tty to allow the user to run bash interactively
+    stdin_open: true
+    tty: true
+    # add devices to the container
+    # devices:
+    #   - /dev/hokuyo:/dev/hokuyo
+    #   - /dev/input/js0:/dev/input/js0
+    # run the entrypoint script and pass the UID and GID of the host user
+    entrypoint: /entrypoint.sh -u "$UID_GID" -n "$UNAME"
+    
