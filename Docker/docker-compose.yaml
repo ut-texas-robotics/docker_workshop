@@ -1,0 +1,30 @@
+version: "3"
+
+services:
+  <service name>:
+    image: 
+    container_name: 
+    build:
+      context:
+      dockerfile:
+    runtime:
+    environment:
+      # enable NVIDIA GPU access inside the container
+      - NVIDIA_DRIVER_CAPABILITIES=all
+      - NVIDIA_VISIBLE_DEVICES=all
+      # disable qt-X11 memory sharing for RViz
+      - QT_X11_NO_MITSHM=1
+    env_file:
+    security_opt:
+    # helps with graphics display in RViz
+      - apparmor:unconfined
+    volumes:
+      # mount the X11 socket to enable graphics display
+      - /tmp/.X11-unix:/tmp/.X11-unix
+    network_mode: 
+    # enable stdin and tty to allow the user to run bash interactively
+    stdin_open: true
+    tty: true
+    devices:
+    entrypoint: 
+    
