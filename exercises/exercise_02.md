@@ -54,6 +54,10 @@ Run a container from the image
 ```
 docker run -d -ti -w /root -v /tmp/.X11-unix:/tmp/.X11-unix -v /dev/dri:/dev/dri -e DISPLAY=${DISPLAY} -e QT_X11_NO_MITSHM=1 --security-opt apparmor:unconfined rosd_i:file_only
 ```
+Open a shell.  Remember you can use tab to get the container name/id.
+```
+docker exec -ti <container id> bash
+```
 Test ROS and bring up RViz with
 ```
 rosrun rviz rviz
