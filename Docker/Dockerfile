@@ -14,6 +14,7 @@ RUN apt update && apt upgrade -y \
     nano \
     vim \
     tmux \
+    x11-apps \
     python3-pip \
     python3-catkin-tools \
     python-is-python3 \
@@ -22,7 +23,7 @@ RUN apt update && apt upgrade -y \
 
 # install ros packages
 # see ../docs/installing_ros_packages.md for alternatives
-RUN apt install -y \
+RUN DEBIAN_FRONTEND=noninteractive apt install -y \
     ros-${ROS_DISTRO}-desktop-full \
     && rm -rf /var/lib/apt/lists/*
 
@@ -42,8 +43,12 @@ RUN source /opt/ros/${ROS_DISTRO}/setup.bash \
 SHELL ["/bin/bash", "-l", "-c"]
 RUN echo -e "\
     source /opt/ros/${ROS_DISTRO}/setup.bash\n\
-    export ROS_PACKAGE_PATH=\$ROS_PACKAGE_PATH:~/amrl_msgs" >> ~/.bashrc
+    export ROS_PACKAGE_PATH=\$ROS_PACKAGE_PATH:~/amrl_msgs" >> ~/.bashrc \
+    && echo -e "\
+    source /opt/ros/${ROS_DISTRO}/setup.bash\n\
+    export ROS_PACKAGE_PATH=\$ROS_PACKAGE_PATH:~/amrl_msgs" >> ~/.profile
 
+# CMD ["roscore"]
 # copy the entrypoint into the image
 COPY ./entrypoint.sh /entrypoint.sh
 # run this script on startup

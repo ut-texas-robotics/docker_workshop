@@ -22,7 +22,7 @@ if id "$uname" >/dev/null 2>&1; then
 else
   # create the host user in the container
   echo "user $uname does not exist, creating..."
-  useradd -u $uid -s /bin/bash $uname
+  useradd -u $uid -s /bin/bash -G dialout $uname
 fi
 
 # set the user as the owner of the projects directory
@@ -34,5 +34,7 @@ chmod 770 /root
 echo "$uname ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/$uname && \
     chmod 0440 /etc/sudoers.d/$uname
 
-#execute the command passed to the docker run
-exec /bin/bash
+source /opt/ros/noetic/setup.bash
+
+# execute a command in the container
+exec roscore

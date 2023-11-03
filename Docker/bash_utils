@@ -15,7 +15,7 @@ rosd-stop(){
 
 rosd-shell() {
     # open a shell in the container
-    docker exec -u $USER -ti rosd_c bash -l
+    docker exec -ti -u $USER -w ~/ rosd_c bash -l
 }
 
 rosd-build() {

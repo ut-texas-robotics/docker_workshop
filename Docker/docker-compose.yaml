@@ -17,12 +17,12 @@ services:
       - NVIDIA_DRIVER_CAPABILITIES=all
       - NVIDIA_VISIBLE_DEVICES=all
       # disable qt-X11 memory sharing for RViz
-      - ENV QT_X11_NO_MITSHM=1
+      - QT_X11_NO_MITSHM=1
     env_file:
       # set environment variables via a file
-      - rosd.env
+      - robot.env
     security_opt:
-    # helps with graphics display in RViz
+    # helps with graphics in RViz
       - apparmor:unconfined
     volumes:
       # mount host directories to the container for persistent storage
@@ -30,7 +30,7 @@ services:
       # mount the X11 socket to enable graphics display
       - /tmp/.X11-unix:/tmp/.X11-unix
       # optionally, add the .Xauthority file to use ssh X11 forwarding
-      # - /home/$USER/.Xauthority:/home/$USER/.Xauthority
+      # - ${HOME}/.Xauthority:/home/$USER/.Xauthority:rw
     # give the container access to the host's network
     network_mode: host
     # enable stdin and tty to allow the user to run bash interactively
