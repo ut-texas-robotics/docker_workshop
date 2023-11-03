@@ -21,8 +21,10 @@ services:
     volumes:
       # mount the X11 socket to enable graphics display
       - /tmp/.X11-unix:/tmp/.X11-unix
+      # for non-nvidia users
+      # - /dev/dri:/dev/dri
       # optionally, add the .Xauthority file to use ssh X11 forwarding
-      # - /home/$USER/.Xauthority:/home/$USER/.Xauthority
+      # - /home/$USER/.Xauthority:/root/.Xauthority
     network_mode: 
     # enable stdin and tty to allow the user to run bash interactively
     stdin_open: true
