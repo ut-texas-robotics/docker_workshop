@@ -6,7 +6,7 @@ Open `Docker/docker-compose.yaml` and let's add configurations together.
 
 ## What is Docker Compose
 
-Docker Compose is a tool for created for defining and running multi-container applications, but it is very useful for configuring even single containers for robots. It allows you to describe your application's services, networks, devices, and volumes in a single `.yaml` file, and then use a short command (`docker-compose up`) to start and run all the services defined in that file.
+Docker Compose is a tool created for defining and running multi-container applications, but it is very useful for configuring even single containers for robots. It allows you to describe your application's services, networks, devices, and volumes in a single `.yaml` file, and then use a short command (`docker-compose up`) to start and run all the services defined in that file.
 
 ## Core Concepts
 

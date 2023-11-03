@@ -34,7 +34,7 @@ Search Docker Hub for images to get the image name and the tag matching your des
 |--------------|--------------|-----------|
 | `FROM`       | - Pull a base image from a registry, Docker Hub, or your own collection  | Examples images are `ros`, `conda`, `ubuntu:22.04`, etc. <br> `FROM <image:tag>` |
 | `RUN`        | - Each of these commands is a layer <br> - `RUN` is often used to execute multiple bash commands strung together with `&&` <br>  | `RUN <command>` <br>`RUN ["executable", "param1", "param2"]`  |
-| `ENV`        | - These are environment variables you need in the build process, not necessarily in your config |   |
+| `ENV`        | - These are environment variables you need in the build process, not necessarily in your config | `ENV MY_VAR=/something/special`  |
 | `SHELL`      | - Set the default shell to use - If left undefined, it's `/bin/sh` |  `SHELL ["/bin/bash", "-c"]` |
 | `COPY`       | - Copy a file/folder into the container, such as an entrypoint script |  `COPY <source> <destination>` |
 | `CMD`        | - `CMD` is not the same as `RUN` <br> - This is the command that is executed when you start a container.  <br> - It does not contribute to building your image; it only provides a directive for what should be executed when you start a container from the image | `CMD ["executable","param1","param2"]` <br>`CMD <command>`, <br>`CMD ["param1", "param2"]`  |
