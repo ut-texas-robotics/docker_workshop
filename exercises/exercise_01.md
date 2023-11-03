@@ -41,7 +41,7 @@ In Terminal #1, do:
 docker run --rm -ti ubuntu:22.04
 ```
 
-This creates the ubuntu container.  `-i` or `--interactive` keeps STDIN open and `-t` or `--tty` allocates a psuedo TTY terminal interface with the container.  `--rm` directs the daemon to remove the container when it is stopped.
+This creates the ubuntu container.  `-i` or `--interactive` keeps STDIN open and `-t` or `--tty` allocates a psuedo TTY terminal interface with the container.  `--rm` directs the daemon to remove the container when it is exited.
 
 Now, in Terminal #2 look at the running containers.
 ```
@@ -117,5 +117,5 @@ You'll see that the file is owned by root.  You can avoid this most simply by do
 
 Finally, remove the container with
 ```
-docker container stop && docker container rm <container id/name>
+docker stop <container id> && docker rm <container id>
 ```
