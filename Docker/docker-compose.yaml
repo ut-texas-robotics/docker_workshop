@@ -29,6 +29,8 @@ services:
       - ../projects:/root/projects
       # mount the X11 socket to enable graphics display
       - /tmp/.X11-unix:/tmp/.X11-unix
+      # for non-nvidia users
+      # - /dev/dri:/dev/dri
       # optionally, add the .Xauthority file to use ssh X11 forwarding
       # - ${HOME}/.Xauthority:/root/.Xauthority:rw
     # give the container access to the host's network

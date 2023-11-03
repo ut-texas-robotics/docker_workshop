@@ -24,7 +24,7 @@ RUN apt update && apt upgrade -y \
 # install ros packages
 # see ../docs/installing_ros_packages.md for alternatives
 RUN DEBIAN_FRONTEND=noninteractive apt install -y \
-    ros-${ROS_DISTRO}-desktop-full \
+    ros-${ROS_DISTRO}-rviz \
     && rm -rf /var/lib/apt/lists/*
 
 RUN rosdep update
@@ -48,8 +48,8 @@ RUN echo -e "\
     source /opt/ros/${ROS_DISTRO}/setup.bash\n\
     export ROS_PACKAGE_PATH=\$ROS_PACKAGE_PATH:~/amrl_msgs" >> ~/.profile
 
-# CMD ["roscore"]
+CMD ["roscore"]
 # copy the entrypoint into the image
-COPY ./entrypoint.sh /entrypoint.sh
+# COPY ./entrypoint.sh /entrypoint.sh
 # run this script on startup
-ENTRYPOINT /entrypoint.sh
+# ENTRYPOINT /entrypoint.sh

@@ -52,7 +52,7 @@ docker build -t rosd_i:file_only .
 
 Run a container from the image
 ```
-docker run -d -ti -w /root -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=${DISPLAY} -e QT_X11_NO_MITSHM=1 --security-opt apparmor:unconfined rosd_i:file_only
+docker run -d -ti -w /root -v /tmp/.X11-unix:/tmp/.X11-unix -v /dev/dri:/dev/dri -e DISPLAY=${DISPLAY} -e QT_X11_NO_MITSHM=1 --security-opt apparmor:unconfined rosd_i:file_only
 ```
 Test ROS and bring up RViz with
 ```
