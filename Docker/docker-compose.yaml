@@ -22,7 +22,7 @@ services:
       # set environment variables via a file
       - robot.env
     security_opt:
-    # helps with graphics in RViz
+    # this is set bc of errors with RViz being denied dbus comm w/ host
       - apparmor:unconfined
     volumes:
       # mount host directories to the container for persistent storage
@@ -30,7 +30,7 @@ services:
       # mount the X11 socket to enable graphics display
       - /tmp/.X11-unix:/tmp/.X11-unix
       # optionally, add the .Xauthority file to use ssh X11 forwarding
-      # - ${HOME}/.Xauthority:/home/$USER/.Xauthority:rw
+      # - ${HOME}/.Xauthority:/root/.Xauthority:rw
     # give the container access to the host's network
     network_mode: host
     # enable stdin and tty to allow the user to run bash interactively
