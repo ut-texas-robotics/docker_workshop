@@ -35,6 +35,8 @@ When working on real robots versus simulation, you can use the `devices` paramet
 
 ## Build and Run
 
+Again, run these commands from the direcory containing your Dockerfile and docker-compose.yaml.
+
 To build an image, do simply
 ```
 docker compose build
