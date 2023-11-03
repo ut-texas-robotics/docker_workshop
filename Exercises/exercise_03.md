@@ -27,11 +27,19 @@ Compose is for both building and running.  The `docker-compose.yaml` goes in the
 
 More information is available in the [Docker Compose Docs](https://docs.docker.com/compose/)
 
-## Practical Considerations
+## Entrypoint Scripts
 
-You may have a single container that works on several different robots.  In that case, it can be useful to have different Compose files for each one.
+In Dockerfiles and in Docker Compose, you can provide an entrypoint to the container.  This is a script that runs when the container starts.  It is a good place to handle things like dynamically creating users in the container, changing file permissions, or setting up other parameters that must be set at runtime rather than in a Dockerfile.
 
-When working on real robots versus simulation, you can use the `devices` parameter in `docker-compose.yaml` to toggle connecting or disregarding hardware.
+## Environment Files
+
+Environment files are a convenient way to set environment variables that are specific to a robot.  Perhaps your container will be run by many types of robots.  You can set an environment file to create variables for each one when the container starts.
+
+Create a file called `robot.env` and add some variables to it
+```
+export MY_ENV_VAR=/something/special
+```
+Add the path to the `env_file:` parameter in `docker-compose.yaml`.
 
 ## Build and Run
 
@@ -49,3 +57,9 @@ Afterward, to stop the running services and remove containers (ie delete them), 
 ```
 docker compose down
 ```
+
+## Practical Considerations
+
+You may have a single container that works on several different robots.  In that case, it can be useful to have different Compose files or Environment files for each one.
+
+When working on real robots versus simulation, you can use the `devices` parameter in `docker-compose.yaml` to toggle connecting or disregarding hardware.

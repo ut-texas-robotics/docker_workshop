@@ -41,3 +41,20 @@ Search Docker Hub for images to get the image name and the tag matching your des
 | `ENTRYPOINT` | - This is a script that runs when you start a container, rather than a simple command  <br> - It is copied into the image when you build it  <br> - The benefit is that you can dynamically make changes to the container using the script  <br> - The challenge is that you may need to pass parameters to it |  `ENTRYPOINT entrypoint.sh` |
 
 See a full list in the [Docker Docs](https://docs.docker.com/engine/reference/builder/)
+
+## Build and Run an Image
+
+When you're finished editing the Dockerfile, build the image with
+```
+docker build -t rosd_i:file_only .
+```
+`-t` names and tags the image with the provided info and `.` indicates the build context.
+
+Run a container from the image
+```
+docker run -d -ti -w /root -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=${DISPLAY} -e QT_X11_NO_MITSHM=1 --security-opt apparmor:unconfined rosd_i:file_only
+```
+Test ROS and bring up RViz with
+```
+rosrun rviz rviz
+```
