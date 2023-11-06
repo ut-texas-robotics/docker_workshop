@@ -9,13 +9,13 @@ services:
       context: .
       dockerfile: Dockerfile
     # use the nvidia runtime for GPU access
-    runtime: nvidia
+    # runtime: nvidia
     environment:
       # pass the display variable to the container
       - DISPLAY=${DISPLAY}
       # enable NVIDIA GPU access inside the container
-      - NVIDIA_DRIVER_CAPABILITIES=all
-      - NVIDIA_VISIBLE_DEVICES=all
+      # - NVIDIA_DRIVER_CAPABILITIES=all
+      # - NVIDIA_VISIBLE_DEVICES=all
       # disable qt-X11 memory sharing for RViz
       - QT_X11_NO_MITSHM=1
     env_file:
@@ -29,8 +29,8 @@ services:
       - ../projects:/root/projects
       # mount the X11 socket to enable graphics display
       - /tmp/.X11-unix:/tmp/.X11-unix
-      # for non-nvidia users
-      # - /dev/dri:/dev/dri
+      # for non-nvidia users, comment out when using nvidia runtime
+      - /dev/dri:/dev/dri
       # optionally, add the .Xauthority file to use ssh X11 forwarding
       # - ${HOME}/.Xauthority:/root/.Xauthority:rw
     # give the container access to the host's network
