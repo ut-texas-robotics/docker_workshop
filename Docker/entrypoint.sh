@@ -25,10 +25,21 @@ else
   useradd -u $uid -s /bin/bash -G dialout $uname
 fi
 
-# set the user as the owner of the projects directory
+# set the user as the owner of the root directory
 chown -R $userid /root
 # allow users to edit the root directory
 chmod 770 /root
+
+if [ -d "/home/$uname" ]; then
+  echo "home directory already exists for $uname"
+else
+  mkdir /home/$uname
+  cp /root/.bashrc /home/$uname/.bashrc 
+  cp /root/.profile /home/$uname/.profile
+  # create a symlink to the projects volume
+  cd /home/$uname && ln -s /root/projects projects
+  chown -R $uname /home/$uname
+fi
 
 # give the host user sudo permissions
 echo "$uname ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/$uname && \
@@ -37,4 +48,4 @@ echo "$uname ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/$uname && \
 source /opt/ros/noetic/setup.bash
 
 # execute a command in the container
-exec roscore
+roscore

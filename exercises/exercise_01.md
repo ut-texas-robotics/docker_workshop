@@ -113,7 +113,7 @@ Now on the host navigate to `mydir` and list the ownership details
 ```
 cd mydir && ls -l
 ```
-You'll see that the file is owned by root.  You can avoid this most simply by doing file creation and editing from the host, rather than the container.  Sometimes though, you can't avoid creating files from the container.  We will discuss how to handle this important feature.
+You'll see that the file is owned by root.  You can avoid this most simply by doing file creation and editing from the host, rather than the container.  Sometimes though, you can't avoid creating files from the container.  We will discuss how to handle this important feature with an `entrypoint.sh` script.
 
 Finally, remove the container with
 ```

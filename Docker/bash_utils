@@ -1,6 +1,6 @@
 rosd-start(){
     #add xhost permissions for docker to use display
-    xhost +si:localuser:root
+    xhost +local:docker
     echo "added docker xhost permissions"
     export UID_GID=$(id -u):$(id -g)
     export UNAME=$(whoami)

@@ -43,13 +43,14 @@ RUN source /opt/ros/${ROS_DISTRO}/setup.bash \
 SHELL ["/bin/bash", "-l", "-c"]
 RUN echo -e "\
     source /opt/ros/${ROS_DISTRO}/setup.bash\n\
-    export ROS_PACKAGE_PATH=\$ROS_PACKAGE_PATH:~/amrl_msgs" >> ~/.bashrc \
+    export ROS_PACKAGE_PATH=\$ROS_PACKAGE_PATH:/root/amrl_msgs" >> ~/.bashrc \
     && echo -e "\
     source /opt/ros/${ROS_DISTRO}/setup.bash\n\
-    export ROS_PACKAGE_PATH=\$ROS_PACKAGE_PATH:~/amrl_msgs" >> ~/.profile
+    export ROS_PACKAGE_PATH=\$ROS_PACKAGE_PATH:/root/amrl_msgs" >> ~/.profile
 
-CMD ["roscore"]
+RUN echo ""
+
 # copy the entrypoint into the image
-# COPY ./entrypoint.sh /entrypoint.sh
+COPY ./entrypoint.sh /entrypoint.sh
 # run this script on startup
-# ENTRYPOINT /entrypoint.sh
+ENTRYPOINT /entrypoint.sh
