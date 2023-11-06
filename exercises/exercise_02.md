@@ -50,9 +50,20 @@ docker build -t rosd_i:file_only .
 ```
 `-t` names and tags the image with the provided info and `.` indicates the build context.
 
-Run a container from the image
+Add xhost permissions for Docker, so that it can communicate with the XServer on the host.
+```
+xhost +local:docker
+```
+
+Run a container from the image.  Choose the command below based on your graphics driver.
+
+- NON-NVIDIA USERS:
 ```
 docker run -d -ti -w /root -v /tmp/.X11-unix:/tmp/.X11-unix -v /dev/dri:/dev/dri -e DISPLAY=${DISPLAY} -e QT_X11_NO_MITSHM=1 --security-opt apparmor:unconfined rosd_i:file_only
+```
+- NVIDIA USERS:
+```
+docker run -d -ti -w /root -v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=${DISPLAY} -e QT_X11_NO_MITSHM=1 --security-opt apparmor:unconfined rosd_i:file_only
 ```
 Open a shell.  Remember you can use tab to get the container name/id.
 ```
