@@ -14,7 +14,7 @@ Each Dockerfile instruction, roughly speaking, creates a layer in the image.  Th
 
 **A:**
 
-When writing an image for development environments, it can be helpful to consider the function of an image as building that environment, and not packaging an entire application or configuring all parameters.  You can use other tools for configuration like docker compose, environment files, bash scripts and/or makefiles.
+When writing an image for development environments, it can be helpful to consider the function of an image as building that environment, and not packaging an entire application or configuring all parameters.  You can use other tools for configuration like docker compose, environment files, bash scripts and/or makefiles.  Your source code also does not need to go into a Dockerfile.  Since you will be changing your code as you develop, storing the code locally and binding it to the container with a volume is preferred.
 
 Many docker users write images for containing entire applications and setting configs, and this is not wrong.  It just depends on how the container is intended to be used.
 
