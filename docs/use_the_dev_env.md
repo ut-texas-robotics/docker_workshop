@@ -39,6 +39,11 @@ Optionally, add to `Docker/entrypoint.sh` to change the script that runs when th
 
 ## Build and Run
 
+This container is meant to be run with the bash_utils functions.  If you don't use them, be sure to give docker xhost permissions with 
+```
+xhost +local:docker
+```
+
 Build the docker image with
 ```
 rosd-build
