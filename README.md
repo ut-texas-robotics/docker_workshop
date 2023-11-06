@@ -23,4 +23,4 @@ Be careful not to install Docker Desktop -- this workshop does not use it.  Dock
 
 ## Use the Development Environment
 
-Follow the instructions at [docs/use_the_dev_env](./docs/user_the_dev_env.md) to customize and use the Docker container code here as a development environment for working on your own robotics code.
+Follow the instructions at [docs/use_the_dev_env](./docs/use_the_dev_env.md) to customize and use the Docker container code here as a development environment for working on your own robotics code.

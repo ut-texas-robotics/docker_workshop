@@ -2,9 +2,6 @@ rosd-start(){
     #add xhost permissions for docker to use display
     xhost +local:docker
     echo "added docker xhost permissions"
-    export UID_GID=$(id -u):$(id -g)
-    export UNAME=$(whoami)
-    echo "gathering host user info... $UNAME $UID_GID"
     docker compose -f $ROSD_DIRECTORY/Docker/docker-compose.yaml up -d
 }
 
@@ -15,7 +12,7 @@ rosd-stop(){
 
 rosd-shell() {
     # open a shell in the container
-    docker exec -ti -u $USER -w ~/ rosd_c bash -l
+    docker exec -ti rosd_c bash -l
 }
 
 rosd-build() {

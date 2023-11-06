@@ -48,8 +48,6 @@ RUN echo -e "\
     source /opt/ros/${ROS_DISTRO}/setup.bash\n\
     export ROS_PACKAGE_PATH=\$ROS_PACKAGE_PATH:/root/amrl_msgs" >> ~/.profile
 
-RUN echo ""
-
 # copy the entrypoint into the image
 COPY ./entrypoint.sh /entrypoint.sh
 # run this script on startup
