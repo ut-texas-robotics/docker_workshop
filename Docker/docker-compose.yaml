@@ -9,6 +9,7 @@ services:
       context: .
       dockerfile: Dockerfile
     # use the nvidia runtime for GPU access
+    # comment out if you don't have an nvidia GPU
     runtime: nvidia
     environment:
       # pass the display variable to the container
@@ -29,10 +30,10 @@ services:
       - ../projects:/root/projects
       # mount the X11 socket to enable graphics display
       - /tmp/.X11-unix:/tmp/.X11-unix
-      # for non-nvidia users
+      # required for non-nvidia users, /dev/dri volume
       # - /dev/dri:/dev/dri
-      # optionally, add the .Xauthority file to use ssh X11 forwarding
-      # - ${HOME}/.Xauthority:/root/.Xauthority:rw
+      # add the .Xauthority file to use ssh X11 forwarding
+      - ${HOME}/.Xauthority:/root/.Xauthority:rw
     # give the container access to the host's network
     network_mode: host
     # enable stdin and tty to allow the user to run bash interactively
@@ -42,6 +43,6 @@ services:
     # devices:
     #   - /dev/hokuyo:/dev/hokuyo
     #   - /dev/input/js0:/dev/input/js0
-    # run the entrypoint script and pass the UID and GID of the host user
-    entrypoint: /entrypoint.sh -u "$UID_GID" -n "$UNAME"
+    # run the entrypoint script
+    entrypoint: /entrypoint.sh
     
