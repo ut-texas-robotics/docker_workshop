@@ -1,6 +1,6 @@
 # Docker for Robotics Workshop
 
-This repo contains exercises and supporting documentation for the workshop held on November 3, 2023.
+This repo contains exercises and supporting documentation for the workshop held on November 3, 2023.  Participants learned how to use Docker to run ROS on robot hardware, regardless of the required Ubuntu OS and ROS versions.
 
 ## Using the Documentation
 
