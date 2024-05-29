@@ -18,6 +18,7 @@ RUN apt update && apt upgrade -y \
     python3-pip \
     python3-catkin-tools \
     python-is-python3 \
+    # install dependencies for robofleet
     libqt5websockets5-dev \
     qt5-default
 
@@ -41,14 +42,15 @@ RUN source /opt/ros/${ROS_DISTRO}/setup.bash \
 
 # setup .bashrc
 SHELL ["/bin/bash", "-l", "-c"]
-RUN echo -e "\
-    source /opt/ros/${ROS_DISTRO}/setup.bash\n\
-    export ROS_PACKAGE_PATH=\$ROS_PACKAGE_PATH:/root/amrl_msgs" >> ~/.bashrc \
-    && echo -e "\
-    source /opt/ros/${ROS_DISTRO}/setup.bash\n\
-    export ROS_PACKAGE_PATH=\$ROS_PACKAGE_PATH:/root/amrl_msgs" >> ~/.profile
-
-RUN echo ""
+#   # set the bash prompt colors
+RUN sed -i 's/#force_color_prompt=yes/force_color_prompt=yes/' "/root/.bashrc" \
+    && sed -i 's/01;32m/01;36m/g; s/01;34m/01;35m/g' "/root/.bashrc" \
+    # source ros setup.bash
+    && echo "source /opt/ros/${ROS_DISTRO}/setup.bash" >> ~/.bashrc \
+    && echo "source /opt/ros/${ROS_DISTRO}/setup.bash" >> ~/.profile \
+    # add a package to the ROS_PACKAGE_PATH
+    echo "export ROS_PACKAGE_PATH=\$ROS_PACKAGE_PATH:/root/amrl_msgs" >> ~/.bashrc \
+    && echo "export ROS_PACKAGE_PATH=\$ROS_PACKAGE_PATH:/root/amrl_msgs" >> ~/.profile
 
 # copy the entrypoint into the image
 COPY ./entrypoint.sh /entrypoint.sh
