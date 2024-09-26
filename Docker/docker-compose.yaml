@@ -1,9 +1,9 @@
-version: "3"
-
 services:
-  rosd_s:
-    image: rosd_i
-    container_name: rosd_c
+  rosd_s_test:
+    # specify user-defined image and container names for multi-user machines
+    # not necessary for single-user machines
+    image: ${USER}/rosd_i
+    container_name: ${USER}_rosd_c
     build:
       # set the build context to the directory containing build files
       context: .

@@ -1,28 +1,34 @@
+compose() {
+    # docker-compose wrapper
+    docker compose -p ${USER}_project -f $ROSD_DIRECTORY/Docker/docker-compose.yaml $@
+}
+
 rosd-start(){
     #add xhost permissions for docker to use display
     xhost +local:docker
     echo "added docker xhost permissions"
-    docker compose -f $ROSD_DIRECTORY/Docker/docker-compose.yaml up -d
+    # start the container in the background
+    compose up -d
 }
 
 rosd-stop(){
     # stop the container and remove it
-    docker compose -f $ROSD_DIRECTORY/Docker/docker-compose.yaml down
+    compose down
 }
 
 rosd-shell() {
     # open a shell in the container
-    docker exec -ti rosd_c bash -l
+    docker exec -ti ${USER}_rosd_c bash -l
 }
 
 rosd-build() {
     # if the container is running, stop it
-    if [ "$(docker ps -q -f name=rosd_c)" ]; then
-        echo "stopping container rosd_c..."
-        docker compose -f $ROSD_DIRECTORY/Docker/docker-compose.yaml down
+    if [ "$(docker ps -q -f name=${USER}_rosd_c)" ]; then
+        echo "stopping container ${USER}_rosd_c..."
+        compose down
     fi
     # build the container from the docker-compose file
-    docker compose -f $ROSD_DIRECTORY/Docker/docker-compose.yaml build
+    compose build
 }
 
 rosd-dir() {
@@ -34,5 +40,5 @@ rosd-dir() {
 
 rosd-log() {
     # view the logs of the picogk container
-    docker logs rosd_c
+    docker logs ${USER}_rosd_c
 }

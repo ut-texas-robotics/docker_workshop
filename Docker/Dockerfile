@@ -34,6 +34,7 @@ RUN rosdep update
 WORKDIR /root
 
 # setup a package from github
+# extra steps for private repos, do not bake your github credentials into the image!
 RUN git clone https://github.com/ut-amrl/amrl_msgs.git
 RUN source /opt/ros/${ROS_DISTRO}/setup.bash \
     && cd amrl_msgs \
