@@ -2,12 +2,12 @@ version: "3"
 
 services:
   rosd_s:
-    image: rosd_i
-    container_name: rosd_c
+    image: 
+    container_name:
     build:
       # set the build context to the directory containing build files
-      context: .
-      dockerfile: Dockerfile
+      context:
+      dockerfile:
     # use the nvidia runtime for GPU access
     # uncomment to use nvidia drivers
     # runtime: nvidia
@@ -21,13 +21,13 @@ services:
       - QT_X11_NO_MITSHM=1
     env_file:
       # set environment variables via a file
-      - robot.env
+      - 
     security_opt:
     # this is set bc of errors with RViz being denied dbus comm w/ host
       - apparmor:unconfined
     volumes:
       # mount host directories to the container for persistent storage
-      - ../projects:/root/projects
+      - 
       # mount the X11 socket to enable graphics display
       - /tmp/.X11-unix:/tmp/.X11-unix
       # required for non-nvidia users, comment out for nvidia users
@@ -35,14 +35,13 @@ services:
       # add the .Xauthority file to use ssh X11 forwarding
       - ${HOME}/.Xauthority:/root/.Xauthority:rw
     # give the container access to the host's network
-    network_mode: host
+    network_mode:
     # enable stdin and tty to allow the user to run bash interactively
     stdin_open: true
     tty: true
     # add devices to the container
     # devices:
-    #   - /dev/hokuyo:/dev/hokuyo
-    #   - /dev/input/js0:/dev/input/js0
+
     # run the entrypoint script
     entrypoint: /entrypoint.sh
     
