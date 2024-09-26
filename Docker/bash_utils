@@ -1,13 +1,19 @@
+compose(){
+    # docker compose used repeatedly in the rosd functions
+    docker compose -f $ROSD_DIRECTORY/Docker/docker-compose.yaml $@
+}
+    
 rosd-start(){
     #add xhost permissions for docker to use display
     xhost +local:docker
     echo "added docker xhost permissions"
-    docker compose -f $ROSD_DIRECTORY/Docker/docker-compose.yaml up -d
+    # start the container
+    compose up -d
 }
 
 rosd-stop(){
     # stop the container and remove it
-    docker compose -f $ROSD_DIRECTORY/Docker/docker-compose.yaml down
+    compose down
 }
 
 rosd-shell() {
@@ -19,15 +25,15 @@ rosd-build() {
     # if the container is running, stop it
     if [ "$(docker ps -q -f name=rosd_c)" ]; then
         echo "stopping container rosd_c..."
-        docker compose -f $ROSD_DIRECTORY/Docker/docker-compose.yaml down
+        compose down
     fi
-    # build the container from the docker-compose file
-    docker compose -f $ROSD_DIRECTORY/Docker/docker-compose.yaml build
+    # build the image
+    compose build
 }
 
 rosd-dir() {
     # Set the directory of the docker_workshop repo on the host
-	# Usage: rosd-dir path_to_rosd_docker_dir
+	# Usage: rosd-dir path/to/docker_workshop
 	# Alternatively, add it to your .bashrc for convenience
     export ROSD_DIRECTORY=$1
 }
