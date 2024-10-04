@@ -8,7 +8,7 @@ If you are new to Docker, take a look at the workshop resources before moving on
 
 - [presentation.pdf](./presentation.pdf)
 - [exercise files](./exercises)
-- [zoom recording](https://utexas.box.com/s/njvrkosbx347xu8ssogrfec0yhlnb0i2) for NRG students
+- [zoom recording](https://utexas.box.com/s/42mzc45268nz9som2ic2anw6ie5jlqzb) for NRG students
 
 ## Install Docker Software
 
