@@ -1,5 +1,3 @@
-version: "3"
-
 services:
   rosd_s:
     image: rosd_i
@@ -33,7 +31,7 @@ services:
       # required for non-nvidia users, comment out for nvidia users
       - /dev/dri:/dev/dri
       # add the .Xauthority file to use ssh X11 forwarding
-      - ${HOME}/.Xauthority:/root/.Xauthority:rw
+      # - ${HOME}/.Xauthority:/root/.Xauthority:rw
     # give the container access to the host's network
     network_mode: host
     # enable stdin and tty to allow the user to run bash interactively
