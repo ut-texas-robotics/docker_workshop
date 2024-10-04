@@ -27,13 +27,13 @@ rosd-build() {
         echo "stopping container ${USER}_rosd_c..."
         compose down
     fi
-    # build the container from the docker-compose file
+    # build from the docker-compose file
     compose build
 }
 
 rosd-dir() {
     # Set the directory of the docker_workshop repo on the host
-	# Usage: rosd-dir path_to_rosd_docker_dir
+	# Usage: rosd-dir path/to/docker_workshop
 	# Alternatively, add it to your .bashrc for convenience
     export ROSD_DIRECTORY=$1
 }
